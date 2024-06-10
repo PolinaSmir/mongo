@@ -40,6 +40,35 @@ module.exports.getSalad = async (req, res, next) => {
   }
 };
 
-module.exports.updateSalad = async (req, res, next) => {};
+module.exports.updateSalad = async (req, res, next) => {
+  try {
+    const {
+      params: { saladId },
+      body,
+    } = req;
 
-module.exports.deleteSalad = async (req, res, next) => {};
+    const updated = await Salad.findByIdAndUpdate(saladId, body, { returnDocument: "after" });
+
+    return res.status(200).send(updated);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports.deleteSalad = async (req, res, next) => {
+  try {
+    const {
+      params: { saladId },
+    } = req;
+
+    const deleted = await Salad.findByIdAndDelete(saladId);
+
+    if (!deleted) {
+      return res.status(400).send("There is no such salad");
+    }
+
+    return res.status(200).send(deleted);
+  } catch (error) {
+    next(error);
+  }
+};
