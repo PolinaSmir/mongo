@@ -1,15 +1,11 @@
 const express = require("express");
 const app = express();
-const SaladController = require("./controllers/salad.controller");
 const { errorHandler } = require("./errorHandler");
+const router = require("./routes");
 
 app.use(express.json());
 
-app.get("/", SaladController.getAllSalads);
-app.post("/", SaladController.createSalad);
-app.get("/:saladId", SaladController.getSalad);
-app.put("/:saladId", SaladController.updateSalad);
-app.delete("/:saladId", SaladController.deleteSalad);
+app.use("/api", router);
 
 app.use(errorHandler);
 

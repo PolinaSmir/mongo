@@ -1,1 +1,1 @@
-DELETE http://localhost:5000/6666a408a4b5dd9fedaed6bd HTTP/1.1
+DELETE http://localhost:5000/api/salads/6666a408a4b5dd9fedaed6bd HTTP/1.1
